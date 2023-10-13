@@ -6,15 +6,16 @@ module.exports = (sequelize) => {
   sequelize.define('Activity', {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoImcrement: true
+      allowNull:false,
+      primaryKey:true,
+      autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
-    dificultad: {
+    difficulty: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -22,12 +23,20 @@ module.exports = (sequelize) => {
         max: 5,
       }
     },
-    duracion: {
-      type: DataTypes.TIME,
+    duration: {
+      type: DataTypes.INTEGER,
     },
-    temporada: {
-      type: DataTypes.ENUM("Verano", "Otoño", "Invierno", "Primavera"),
+    season: {
+      type: DataTypes.ENUM('Verano', 'Otono', 'Invierno', 'Primavera'),
       allowNull: false
     }
   }, { timestamps: false })
 }
+
+// {
+//   "name": "futbolito", 
+//   "difficulty": 2, 
+//   "duration": 3, 
+//   "season": "Verano", 
+//   "countries": ["Colombia"]
+// }
