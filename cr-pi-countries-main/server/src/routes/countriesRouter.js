@@ -11,7 +11,7 @@ router.get('/countries', getCountH);
 
 router.get('/countries/:idPais', getCountIdH);
 
-router.get('/country', getCountNameH);
+router.get('/country/', getCountNameH);
 
 
 

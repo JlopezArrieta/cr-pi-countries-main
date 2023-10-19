@@ -5,9 +5,13 @@ import {NavLink} from "react-router-dom";
 const Landing = () => {
   return (
     <div className={style.homeContainer}>
-      <h1 className={style.heading}> Los viajes son en la juventud una parte de educación y, en la vejez, una parte de experiencia (Francis Bacon)</h1>
+      <h1>Landing Page</h1>
+      <h2 className={style.heading}> 
+      Travel is a part of education in youth and, in old age,
+      a part of experience (Francis Bacon)
+      </h2>
       <NavLink to="/home">
-        <button>Nos Vamos de Viaje ✈️</button>
+        <button>We Are Going on a Trip ✈️</button>
       </NavLink>
       <img src={Logolanding} className={style.landingImage} alt="LogoMundoTerrestre" />
     </div>

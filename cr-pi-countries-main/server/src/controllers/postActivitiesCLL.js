@@ -34,9 +34,9 @@ const postActivitiesCLL = async (name, difficulty, duration, season, countries) 
       //nombre del país formateado. 
       let addCountry = await Country.findOne({
         where: {
-          name: formattedCountry,
+          name: formattedCountry
         }
-      })
+      });
 
       arrayCountries.push(addCountry);
     };
@@ -50,8 +50,9 @@ const postActivitiesCLL = async (name, difficulty, duration, season, countries) 
     //países. La función addCountries se llama en el objeto newActivity.
     await newActivity.addCountries(arrayCountries);
 
-  
-    return newActivity;
+
+    // return newActivity;
+    return "La Activity fue creada con exito";
   };
 };
 

@@ -5,15 +5,16 @@ const { Activity, Country } = require('../db');
 //esta función contendrá operaciones asincrónicas, como consultas a la base de datos.
 const getActivitiesCLL = async () => {
   const activitiesDB = await Activity.findAll(
-    {
-      include: {
-        model: Country,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        }
-      }
-    }
+
+    // {
+    //   include: {
+    //     model: Country,
+    //     attributes: ["name"],
+    //     through: {
+    //       attributes: [],
+    //     }
+    //   }
+    // }
   );
 
   if (activitiesDB.length > 0) return activitiesDB;

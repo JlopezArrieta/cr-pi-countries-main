@@ -1,0 +1,15 @@
+//Countries
+export const GET_COUNTRIES = "GET_COUNTRIES";
+export const GET_COUNTRIES_BY_ID = "GET_COUNTRIES_BY_ID";
+export const GET_COUNTRIES_BY_NAME = "GET_COUNTRIES_BY_NAME";
+
+//Filtros
+export const ORDER = "ORDER";
+export const FILTER_BY_CONTINENT = "FILTER_BY_CONTINENT";
+export const FILTER_BY_ACTIVITY = "FILTER_BY_ACTIVITY";
+export const COMBINED_BY_FILTERS = "COMBINED_BY_FILTERS";
+
+//Activities
+export const POST_ACTIVITIES = "POST_ACTIVITIES";
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
+

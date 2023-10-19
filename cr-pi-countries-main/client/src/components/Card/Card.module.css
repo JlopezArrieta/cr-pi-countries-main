@@ -1,0 +1,15 @@
+.Card{
+    background-color: violet;
+    border: black;
+    border-radius: 5px;
+    margin: 7px;
+    padding: 5px;
+    width: 200px;
+
+    /* border: 1px solid rgb(34, 33, 31);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px; */
+}
+
+   
