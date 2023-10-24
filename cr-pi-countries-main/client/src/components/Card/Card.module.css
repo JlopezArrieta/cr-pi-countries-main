@@ -1,15 +1,19 @@
 .Card{
-    background-color: violet;
-    border: black;
+    background-color: rgb(133, 181, 213);
+    border: rgb(169, 41, 41);
     border-radius: 5px;
     margin: 7px;
     padding: 5px;
     width: 200px;
-
-    /* border: 1px solid rgb(34, 33, 31);
-    width: fit-content;
-    height: fit-content;
-    border-radius: 10px; */
+    min-height: 150px;
 }
 
+.flagsImage > img {
+    margin-top: 20px;
+    width: 200px;
+    height: 120px;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
    

@@ -1,4 +1,4 @@
-// import Detail from "./Detail.module.css";
+import style from "./Detail.module.css";
 import { useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { getCountriesById } from "../../redux/actions";
@@ -17,11 +17,11 @@ const Detail = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className={style.contDetail}>
       <h1>Detail Page</h1>
-      <div>
-        <img src={detail.flagsImage} alt={detail.name} width={"200px"} />
-        <div>
+      <div className={style.countryDetails}>
+        <img src={detail.flagsImage} alt={detail.name}  className={style.flagImage}/>
+        <div className={style.countryInfo}>
           <h2>Id: {detail.id}</h2>
           <h2>Name: {detail.name}</h2>
           <p>Capital: {detail.capital}</p>

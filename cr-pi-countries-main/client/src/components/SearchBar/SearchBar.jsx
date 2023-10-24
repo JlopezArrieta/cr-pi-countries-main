@@ -1,22 +1,32 @@
-// import style from "./SearchBar.module.css";
-import axios from "axios";
+import style from "./SearchBar.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {getCountriesByName} from "../../redux/actions";
+import { getCountries, getCountriesByName } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
+
 
 const SearchBar = () => {
 
-  const dispatch = useDispatch()
-  const [name, setName] = useState("")
+  const navigate = useNavigate();
 
-  const handleInputChange =(evento)=>{
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+
+  const handleInputChange = (evento) => {
     evento.preventDefault()
     setName(evento.target.value)
   }
 
-  const handleSubmit =(evento)=>{
+  const handlerClick = (event) => {
+    dispatch(getCountries())
+  }
+
+
+  const handleSubmit = (evento) => {
     evento.preventDefault()
     dispatch(getCountriesByName(name))
+    setName('')
+    navigate("/home");
   }
 
   return (
@@ -27,7 +37,8 @@ const SearchBar = () => {
         placeholder="Country Search"
         onChange={handleInputChange}
       />
-      <button type="submit" onClick={handleSubmit}>Search</button>
+      <button className={style.navbarlinks} type="submit" onClick={handleSubmit}>Search</button>
+      {/* <button onClick={handlerClick}>Reload</button> */}
     </div >
   );
 };

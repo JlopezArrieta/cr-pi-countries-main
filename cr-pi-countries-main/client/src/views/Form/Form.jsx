@@ -1,6 +1,6 @@
-import axios from "axios";
+import style from "./Form.module.css";
 import validations from "../validations";
-import { getCountries } from "../../redux/actions";
+import { getCountries, postActivities } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +10,16 @@ const Form = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const countries = useSelector((state) => state.countries);
+  const countries = useSelector((state) => state.allCountries);
+
+  const activities = useSelector(state => state.activities);
 
   useEffect(() => {
     dispatch(getCountries());
   }, [dispatch]);
 
   const [errors, setErrors] = useState({});
+  
   const [activityData, setActivityData] = useState({
     name: "",
     difficulty: "",
@@ -31,19 +34,21 @@ const Form = () => {
     setActivityData({
       ...activityData,
       [event.target.name]: event.target.value,
+
     });
     setErrors(
       validations({
         ...activityData,
         [event.target.name]: event.target.value,
-      })
+      }, activities)
     );
+    console.log(errors)
   };
 
   const handleCountrySearch = (event) => {
-    const searchQuery = event.target.value.toLowerCase();
+    const searchAct = event.target.value.toLowerCase();
     const filteredCountries = countries.filter((country) =>
-      country.name.toLowerCase().includes(searchQuery)
+      country.name.toLowerCase().includes(searchAct)
     );
     setActivityData({
       ...activityData,
@@ -66,48 +71,35 @@ const Form = () => {
   const handleRemoveCountry = (country) => {
     setActivityData((prevData) => ({
       ...prevData,
-      countries: prevData.countries.filter((count) => count !== country),
+      countries: Data.countries.filter((count) => count !== country),
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const endpoint = "http://localhost:3001/activities";
-    try {
-      const response = await axios.post(endpoint, activityData);
-      console.log("Response from server:", response.data);
-      alert("Activity created successfully!");
-      navigate("/home");
-    } catch (error) {
-      // console.error(`Error creating activity:" ${error}`);
-      if (error.response) {
-        alert(`Error response from server: ${error.response.data.error}`);
-      } else {
-      alert("Error creating activity. Please try again.");
-      }
-    }
-  };
-
+    dispatch(postActivities(activityData));
+    navigate("/home");
+  }
 
   return (
     <div>
-      {console.log(activityData)}
-    <form onSubmit={handleSubmit}>
+      {/* {console.log(activityData)} */}
+    <form onSubmit={handleSubmit}  className={style.contForm}>
 
       <div>
-        <h2>CREATE ACTIVITY FOR YOUR COUNTRIES</h2>
-        <p>Fields with * are required</p>
+        <h2 className={style.title}>CREATE ACTIVITY FOR YOUR COUNTRIES</h2>
+        <p className={style.subTitle}>Fields with * are required</p>
       </div>
 
       <div>
-        <label>Name: *</label>
-        <input type="text" name="name" placeholder="Give the activity name" value={activityData.name} onChange={changeHandler}/>
+        <label className={style.label}>Name: *</label>
+        <input className={style.input} type="text" name="name" placeholder="Give the activity name" value={activityData.name} onChange={changeHandler}/>
         {errors.name && <p>{errors.name}</p>}
       </div>
 
       <div>
-        <label>Difficulty: *</label>
-        <select type="number" name="difficulty" value={activityData.difficulty} onChange={changeHandler}>
+        <label className={style.label}>Difficulty: *</label>
+        <select className={style.input} type="number" name="difficulty" value={activityData.difficulty} onChange={changeHandler}>
           <option value="">Select difficulty</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -119,14 +111,14 @@ const Form = () => {
       </div>
 
       <div>
-        <label>Duration In Hour: *</label>
-        <input type="number" name="duration" value={activityData.duration} onChange={changeHandler}/>
+        <label className={style.label}>Duration In Hour: *</label>
+        <input className={style.input} type="number" name="duration" value={activityData.duration} onChange={changeHandler}/>
         {errors.duration && <p>{errors.duration}</p>}
       </div>
 
       <div>
-        <label>Season: *</label>
-        <select name="season" value={activityData.season} onChange={changeHandler}>
+        <label className={style.label}>Season: *</label>
+        <select className={style.input} name="season" value={activityData.season} onChange={changeHandler}>
           <option value="">Select season</option>
           <option value="Summer">Summer</option>
           <option value="Autumn">Autumn</option>
@@ -137,14 +129,14 @@ const Form = () => {
       </div>
 
       <div>
-        <label>Countries: *</label>
-        <input type="text" name="countries" placeholder="Search countries" value={activityData.countrySearch} onChange={handleCountrySearch} />
+        <label className={style.label}>Countries: *</label>
+        <input className={style.input} type="text" name="countries" placeholder="Search countries" value={activityData.countrySearch} onChange={handleCountrySearch} />
         <div>
             {
               activityData.searchResults.map((country) => ( 
                 <div key={country.name} onClick={() => handleAddCountry(country)}>
                   {country.name}
-                  {activityData.countries.includes(country.name) && (<span>Added</span>)}
+                  {/* {activityData.countries.includes(country.name)} */}
                 </div>
               ))
             }
@@ -155,7 +147,7 @@ const Form = () => {
             activityData.countries.map((country) => (
               <div key={country}>
                 <span>{country}</span>
-                <button type="button" onClick={() => handleRemoveCountry(country)}>
+                <button type="button" onClick={handleRemoveCountry}>
                   X
                 </button>
               </div>
@@ -165,9 +157,10 @@ const Form = () => {
        
       <div>
           {
-            activityData.name && activityData.difficulty && activityData.season && activityData.countries.length > 0 
-            ? ( <button>CREATE ACTIVITY</button> )
-            : ( <button disabled>COMPLETE ALL FIELDS FIRST</button>)
+            errors.name || errors.difficulty || errors.season || !activityData.countries.length  
+          
+            ?( <button disabled>COMPLETE ALL FIELDS FIRST</button>)
+            :( <button>CREATE ACTIVITY</button> )
           }
         </div>
 

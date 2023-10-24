@@ -6,7 +6,8 @@ const postActivitiesCLL = async (name, difficulty, duration, season, countries) 
   //Comienza una condición que verifica si alguno de los argumentos requeridos falta.
   //Si falta alguno de estos campos, se lanza un error.
   if (!name || !difficulty || !season || !countries) {
-    throw Error("No se puede crear una nueva actividad. Faltan algunos campos.");
+    throw Error("Cannot create a new activity. Some fields are missing.");
+                 //No se puede crear una nueva actividad. Faltan algunos campos. 
   }
   else {
     //Arreglo vacío que se utilizará para almacenar objetos de países.
@@ -28,8 +29,17 @@ const postActivitiesCLL = async (name, difficulty, duration, season, countries) 
     for (const country of countries) {
 
       //Capitalizar la primera letra de pais en mayuscula y poner el resto en minúsculas.
-      const formattedCountry = country.charAt(0).toUpperCase() + country.slice(1).toLowerCase();
-
+      const formattedCountry = capitalizarPalabras(country);
+      
+      function capitalizarPalabras( val ) {
+          return val.toLowerCase()
+                  .trim()
+                  .split(' ')
+                  .map( v => v[0].toUpperCase() + v.substr(1) )
+                  .join(' ');  
+      }
+      
+      
       //Utiliza el modelo Country para buscar un país en la base de datos que coincida con el 
       //nombre del país formateado. 
       let addCountry = await Country.findOne({
@@ -52,7 +62,8 @@ const postActivitiesCLL = async (name, difficulty, duration, season, countries) 
 
 
     // return newActivity;
-    return "La Activity fue creada con exito";
+    return "Activity created successfully!";
+            //La Activity fue creada con exito.
   };
 };
 

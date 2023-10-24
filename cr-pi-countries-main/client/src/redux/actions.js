@@ -1,5 +1,10 @@
 import axios from "axios";
-import { GET_COUNTRIES, GET_COUNTRIES_BY_ID, GET_COUNTRIES_BY_NAME, GET_ACTIVITIES } from "./actions-types";
+import {
+  GET_COUNTRIES,
+  GET_COUNTRIES_BY_ID,
+  GET_COUNTRIES_BY_NAME,
+  GET_ACTIVITIES
+} from "./actions-types";
 
 const endpoint = "http://localhost:3001/countries";
 
@@ -51,10 +56,36 @@ export const getCountriesByName = (name) => {
   }
 }
 
+export const postActivities = (activityData) => {
+  return async (dispatch) => {
+    try {
+     await axios.post("http://localhost:3001/activities", activityData);
+     alert("The activity was created successfully");
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  }
+}
 
-// if (!name) return alert('Ingrese Un Nombre Valido');
-//     if (countries.map((country) => country.name === name)) {
-//       return alert('El Nombre de este pais ya esta ingresado');
-//     }
+
+export const getActivities = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get("http://localhost:3001/activities");
+      if (!response.data) throw Error("No activities available");
+                            //No hay actividades disponibles.
+      return dispatch({
+        type: GET_ACTIVITIES,
+        payload: response.data,
+      })
+    } catch (error) {
+      console.log(error.message);
+      alert('You must create the activities');
+             //Debes crear las actividades.
+    }
+  }
+};
+
+
 
 

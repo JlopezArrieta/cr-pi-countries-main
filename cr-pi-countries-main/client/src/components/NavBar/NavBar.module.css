@@ -2,17 +2,22 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: rgb(146, 58, 187);
+    background-color: rgb(221, 182, 245);
     border: solid 2px black;
     box-shadow: 0px 2px 5px red;
+    padding: 10px 0px;
 }
 
 .navbarlinks{
-    display: flex;
-    justify-content: space-between;
-    width: 15rem;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f56868;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  margin-right: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.navbarpage{
-    color: white;
-}

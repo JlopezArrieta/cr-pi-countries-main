@@ -15,7 +15,6 @@ function App() {
   return (
     <div>
        {pathname !== "/" && <NavBar />}
-       <hr/>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
