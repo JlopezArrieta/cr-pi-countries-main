@@ -16,7 +16,7 @@ const Form = () => {
 
   useEffect(() => {
     dispatch(getCountries());
-  }, [dispatch]);
+  }, []);
 
   const [errors, setErrors] = useState({});
   
@@ -69,9 +69,9 @@ const Form = () => {
   };
 
   const handleRemoveCountry = (country) => {
-    setActivityData((prevData) => ({
-      ...prevData,
-      countries: Data.countries.filter((count) => count !== country),
+    setActivityData((data) => ({
+      ...data,
+      countries: data.countries.filter((count) => count !== country),
     }));
   };
 
@@ -136,7 +136,6 @@ const Form = () => {
               activityData.searchResults.map((country) => ( 
                 <div key={country.name} onClick={() => handleAddCountry(country)}>
                   {country.name}
-                  {/* {activityData.countries.includes(country.name)} */}
                 </div>
               ))
             }
