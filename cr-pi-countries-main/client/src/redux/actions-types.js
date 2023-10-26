@@ -16,6 +16,7 @@ export const  ORDER_CONT = "ORDER_CONT";
 
 //Paginacion
 export const  PAGINATE = "PAGINATE";
+export const  RESTORE = "RESTORE";
 
 //Reseteando
 export const  RESET = "RESET";

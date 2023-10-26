@@ -13,7 +13,7 @@ function Cards({ countries }) {
               name={country?.name}
               flagsImage={country?.flagsImage}
               continents={country?.continents}
-              population={country?.population}
+              // population={country?.population}
             />
           );
         }
@@ -22,7 +22,5 @@ function Cards({ countries }) {
     </div>
   );
 }
-
-
 
 export default Cards;

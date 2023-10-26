@@ -5,7 +5,6 @@ const getCountH = async (req, res) => {
     const resCountries = await getCountCLL();
     return res.status(200).json(resCountries);
   } catch (error) {
-    // return res.status(400).json({ error: "Paises no encontrados" });
     return res.status(400).json(error.message)
   }
 }

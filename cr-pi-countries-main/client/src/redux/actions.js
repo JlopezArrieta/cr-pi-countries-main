@@ -12,8 +12,7 @@ export const getCountries = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint);
-      console.log(axios)
-      if (!data) throw new Error("Los paises No Fueron Encontrados");
+      if (!data) throw new Error("The countries were not found");
       return dispatch({
         type: GET_COUNTRIES,
         payload: data
@@ -28,7 +27,7 @@ export const getCountriesById = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`http://localhost:3001/countries/${id}`);
-      if (!response) throw new Error("No se puede encontrar el detalle de ese país.");
+      if (!response) throw new Error("Cannot find the details of that country");
       return dispatch({
         type: GET_COUNTRIES_BY_ID,
         payload: response.data
@@ -51,7 +50,7 @@ export const getCountriesByName = (name) => {
         })
       }
     } catch (error) {
-      alert("El pais con ese Nombre no Fue Encontrado");
+      alert("The country with that name was not found");//El pais con ese Nombre no Fue Encontrado
     }
   }
 }
@@ -62,7 +61,7 @@ export const postActivities = (activityData) => {
      await axios.post("http://localhost:3001/activities", activityData);
      alert("The activity was created successfully");
     } catch (error) {
-      alert(error.response.data.error);
+      alert("The activity with that name already exists");
     }
   }
 }

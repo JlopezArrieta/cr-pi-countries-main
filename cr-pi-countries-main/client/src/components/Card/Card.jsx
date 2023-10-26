@@ -1,4 +1,4 @@
-import style from "./Card.module.css"
+import style from "./Card.module.css";
 import { Link } from "react-router-dom";
 
 const Card = ({ id, name, flagsImage, continents, population }) => {
@@ -13,7 +13,7 @@ const Card = ({ id, name, flagsImage, continents, population }) => {
         <div>
           <h3>{name}</h3>
           <h2>{continents}</h2>
-          <h2>{population}</h2>
+          {/* <h2>{population}</h2> */}
         </div>
       </Link>
 

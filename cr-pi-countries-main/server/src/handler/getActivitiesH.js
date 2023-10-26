@@ -5,7 +5,7 @@ const getActivitiesH = async (req, res) => {
         const resActivities = await getActivitiesCLL();
         return res.status(200).json(resActivities);
     } catch (error) {
-        return res.status(400).json({ error: "Actividades no encontradas" });
+        return res.status(400).json({error: error.message});
     }
 }
 

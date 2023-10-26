@@ -1,5 +1,5 @@
 
-import { CONTINENTS_FILTER, ACTIVITY_FILTER, ORDER_CONT, PAGINATE, RESET } from "./actions-types";
+import { CONTINENTS_FILTER, ACTIVITY_FILTER, ORDER_CONT, PAGINATE, RESET, RESTORE } from "./actions-types";
 
 
 export const continentsFilter = (continents) => {
@@ -36,6 +36,14 @@ export const getReset = () =>{
   return (dispatch) =>{
     dispatch({
       type:RESET,
+    })
+  }
+}
+
+export const getPageRestored = () =>{
+  return (dispatch) =>{
+    dispatch({
+      type:RESTORE,
     })
   }
 }

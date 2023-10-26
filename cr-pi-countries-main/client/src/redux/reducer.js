@@ -9,6 +9,7 @@ import {
   ORDER_CONT,
   PAGINATE,
   RESET,
+  RESTORE,
 } from "./actions-types";
 
 const initialState = {
@@ -59,16 +60,13 @@ const reducer = (state = initialState, action) => {
         activities: action.payload,
       }
 
-    //findex es desde donde
-    //ITEMS_PER_PAGE hasta donde
-    // caso de paginado donde definimos nuestras variables
     case PAGINATE:
-      const nextPage = state.currentPage + 1; //nextPage para avanzar por pagina
-      const prevPage = state.currentPage - 1;//prevPage para retroceder por pagina
-      //fIndex me indica desde donde voy a tomar las cartas y ITEMS_PER_PAGE es cuantas cartas voy a tomar
+      const nextPage = state.currentPage + 1;
+      const prevPage = state.currentPage - 1;
+      
       const fIndex = action.payload === "next" ? nextPage * ITEMS_PER_PAGE : prevPage * ITEMS_PER_PAGE;
-      //combinacion de filtros con paginacion
-      if (state.flagFilter) {// si flagFilter es verdadero entra al if y compara la opcion con next o con prev para darle un limite y que no siga paginando
+      
+      if (state.flagFilter) {
         if (action.payload === "next" && fIndex >= state.filtereds.length) return state
         else if (action.payload === "prev" && prevPage < 0) return state;
 
@@ -269,6 +267,12 @@ const reducer = (state = initialState, action) => {
         flagFilterAct: false,
         filtereds: []
       }
+
+      case RESTORE:
+        return {
+          ...state,
+          currentPage: 0
+        }
 
     default:
       return { ...state }

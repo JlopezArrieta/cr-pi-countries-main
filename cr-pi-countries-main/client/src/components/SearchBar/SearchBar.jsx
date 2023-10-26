@@ -1,9 +1,9 @@
 import style from "./SearchBar.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCountries, getCountriesByName } from "../../redux/actions";
+import { getCountriesByName } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-
+import { getPageRestored } from "../../redux/actionsFilters";
 
 const SearchBar = () => {
 
@@ -16,15 +16,11 @@ const SearchBar = () => {
     evento.preventDefault()
     setName(evento.target.value)
   }
-
-  const handlerClick = (event) => {
-    dispatch(getCountries())
-  }
-
-
+ 
   const handleSubmit = (evento) => {
     evento.preventDefault()
     dispatch(getCountriesByName(name))
+    dispatch(getPageRestored())
     setName('')
     navigate("/home");
   }
@@ -38,7 +34,6 @@ const SearchBar = () => {
         onChange={handleInputChange}
       />
       <button className={style.navbarlinks} type="submit" onClick={handleSubmit}>Search</button>
-      {/* <button onClick={handlerClick}>Reload</button> */}
     </div >
   );
 };

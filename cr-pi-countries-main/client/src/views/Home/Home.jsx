@@ -9,23 +9,16 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  //este primer countries es una variable que guarda el cambio de state.
-  //Countries de el estado inicial de reducer.
-
   const countries = useSelector((state) => state.countries);
   const activities = useSelector((state) => state.activities);
   const currentPage = useSelector((state) => state.currentPage);
-
-  //Hook que nos ayuda a controlar el ciclo de vida de una pagina, 
-  //es decir sus funcionalidades.
 
   useEffect(() => {
     dispatch(getActivities());
     if (countries.length === 0) {
       dispatch(getCountries());
     }
-  }, [dispatch]);
-  // return (() => {clearDetail()})
+  }, []);
 
   const handlerContinentsFilter = (event) => {
     dispatch(continentsFilter(event.target.value));

@@ -10,7 +10,7 @@ const getCountIdCLL = async (id) => {
       }
     }
   });
-  if (!countryDB) return "Pais no Encontrado";
+  if (!countryDB) return "Country not found with that ID";
   return countryDB;
 }
 

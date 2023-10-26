@@ -34,7 +34,6 @@ const Form = () => {
     setActivityData({
       ...activityData,
       [event.target.name]: event.target.value,
-
     });
     setErrors(
       validations({
@@ -42,7 +41,6 @@ const Form = () => {
         [event.target.name]: event.target.value,
       }, activities)
     );
-    console.log(errors)
   };
 
   const handleCountrySearch = (event) => {
@@ -78,12 +76,20 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch(postActivities(activityData));
-    navigate("/home");
+    setActivityData({
+      name: "",
+      difficulty: "",
+      duration: "",
+      season: "",
+      countries: [],
+      countrySearch: "",
+      searchResults: [],
+    })
+    //  navigate("/home");
   }
 
   return (
     <div>
-      {/* {console.log(activityData)} */}
     <form onSubmit={handleSubmit}  className={style.contForm}>
 
       <div>
@@ -112,7 +118,7 @@ const Form = () => {
 
       <div>
         <label className={style.label}>Duration In Hour: *</label>
-        <input className={style.input} type="number" name="duration" value={activityData.duration} onChange={changeHandler}/>
+        <input className={style.input} type="Number" name="duration" min="1" max="24" value={activityData.duration} onChange={changeHandler}/>
         {errors.duration && <p>{errors.duration}</p>}
       </div>
 
@@ -136,6 +142,7 @@ const Form = () => {
               activityData.searchResults.map((country) => ( 
                 <div key={country.name} onClick={() => handleAddCountry(country)}>
                   {country.name}
+                  {activityData.countries.includes(country.name) && (<span className={style.addedIndicator}>Added</span>)}
                 </div>
               ))
             }
@@ -146,7 +153,7 @@ const Form = () => {
             activityData.countries.map((country) => (
               <div key={country}>
                 <span>{country}</span>
-                <button type="button" onClick={handleRemoveCountry}>
+                <button type="button" onClick={() => handleRemoveCountry(country)}>
                   X
                 </button>
               </div>
@@ -156,7 +163,7 @@ const Form = () => {
        
       <div>
           {
-            errors.name || errors.difficulty || errors.season || !activityData.countries.length  
+            errors.name || errors.difficulty || errors.season || errors.duration || !activityData.countries.length  
           
             ?( <button disabled>COMPLETE ALL FIELDS FIRST</button>)
             :( <button>CREATE ACTIVITY</button> )

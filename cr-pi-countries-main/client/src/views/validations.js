@@ -1,4 +1,4 @@
-const validations = (activityData, activities) => {
+const validations = (activityData) => {
   const errors = {};
 
   //Nombre
@@ -15,17 +15,17 @@ const validations = (activityData, activities) => {
     errors.difficulty = 'Difficulty is required.';
   }
 
+  //Duration
   if (!activityData.duration) {
     errors.duration = 'The Duration is required.';
-  } else if (activityData.duration < 1) {
-    errors.duration = 'The Validation data is not valid.';
-  } else if (isNaN(parseInt(activityData.duration))) {
+  }
+  if(!/^[1-9]\d*$/.test(activityData.duration)) {
+    errors.duration = 'The Validation data is not valid';
+  }
+  if (isNaN(parseInt(activityData.duration))) {
     errors.duration = 'Enter a valid number.';
   }
 
-
-  const activityEnc = activities.filter(act => act.name === activityData.name)
-  if (activityEnc.length) errors.name = "La actividad ya fue creada."
 
   //Temporada
   if (!activityData.season) {

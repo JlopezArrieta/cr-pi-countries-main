@@ -8,4 +8,5 @@ router.post('/activities', postActivityH);
 
 router.get('/activities', getActivitiesH);
 
+
 module.exports = router;
