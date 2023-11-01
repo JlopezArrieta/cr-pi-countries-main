@@ -15,9 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getActivities());
-    if (countries.length === 0) {
-      dispatch(getCountries());
-    }
+    dispatch(getCountries());
   }, []);
 
   const handlerContinentsFilter = (event) => {

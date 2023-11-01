@@ -3,12 +3,10 @@ import validations from "../validations";
 import { getCountries, postActivities } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const Form = () => {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const countries = useSelector((state) => state.allCountries);
 
@@ -85,7 +83,6 @@ const Form = () => {
       countrySearch: "",
       searchResults: [],
     })
-    //  navigate("/home");
   }
 
   return (
